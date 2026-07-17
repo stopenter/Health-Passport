@@ -49,6 +49,52 @@ label{display:block;font-weight:800;margin-top:12px}select,input,textarea{width:
 @media(max-width:850px){.queue{grid-template-columns:repeat(2,1fr)}.qsummary{grid-column:span 2}.c4,.c5,.c6,.c7,.c8{grid-column:span 12}.stat-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.queue{grid-template-columns:1fr 1fr}.week,.follow-grid{grid-template-columns:repeat(4,1fr)}}
 @media print{header,.no-print{display:none!important}.page{display:none!important}#passport{display:block!important}.card{box-shadow:none;border:none}}
+
+.sim-panel{
+  margin-top:12px;
+  background:#fff;
+  border:1px dashed #93c5fd;
+  border-radius:14px;
+  padding:10px 12px;
+}
+.sim-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.sim-title{
+  font-weight:900;
+  color:#1d4ed8;
+}
+.sim-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.sim-btn{
+  border:1px solid #bfdbfe;
+  background:#eff6ff;
+  color:#1d4ed8;
+  border-radius:10px;
+  padding:8px 11px;
+  font-size:15px;
+  font-weight:800;
+  cursor:pointer;
+}
+.sim-btn:hover{background:#dbeafe}
+.sim-btn.reset{
+  background:#f8fafc;
+  color:#475569;
+  border-color:#cbd5e1;
+}
+.sim-note{
+  margin-top:7px;
+  font-size:14px;
+  color:var(--muted);
+}
+
 </style>
 </head>
 <body>
@@ -62,6 +108,23 @@ label{display:block;font-weight:800;margin-top:12px}select,input,textarea{width:
     <div class="qcard"><span>⏳</span><small>前方等候</small><b id="waitingNo">14位</b></div>
     <div class="qsummary"><div id="queueText">約10至20分鐘，可安心互動</div><div class="qbar"><div id="queueBar" style="width:61%"></div></div><small id="queueMode">🟢 建議：運動與生活目標衛教</small></div>
   </div>
+
+  <div class="sim-panel no-print">
+    <div class="sim-head">
+      <div class="sim-title">🧪 候診進度模擬</div>
+      <div class="sim-actions">
+        <button class="sim-btn" type="button" onclick="advanceQueue(1)">前進 1 號</button>
+        <button class="sim-btn" type="button" onclick="advanceQueue(3)">前進 3 號</button>
+        <button class="sim-btn" type="button" onclick="setQueueStage('full')">完整衛教</button>
+        <button class="sim-btn" type="button" onclick="setQueueStage('focus')">重點衛教</button>
+        <button class="sim-btn" type="button" onclick="setQueueStage('passport')">快速護照</button>
+        <button class="sim-btn" type="button" onclick="setQueueStage('visit')">輪到看診</button>
+        <button class="sim-btn reset" type="button" onclick="resetQueue()">重設</button>
+      </div>
+    </div>
+    <div class="sim-note">此功能用於原型測試與成果展示，模擬叫號變化及系統建議的衛教模式。</div>
+  </div>
+
   <div class="tabs">
     <button data-p="home" class="on">健康首頁</button>
     <button data-p="plan">我的計畫</button>
@@ -163,7 +226,68 @@ function resetAssessment(){data.assessment={};delete data.amulet;save();amuletFo
 function renderAmuletEnergy(){const done=data.logs.filter(x=>lastDates(30).includes(x.date)&&x.done).length;const rate=Math.round(done/30*100);amuletEnergy.style.width=rate+"%";amuletEnergyText.textContent=`近30日完成 ${done} 天，御守能量 ${rate}%`}
 function renderReview(){const logs=data.logs.filter(x=>lastDates(30).includes(x.date)).sort((a,b)=>b.date.localeCompare(a.date));const done=logs.filter(x=>x.done);rDone.textContent=done.length+"天";rRate.textContent=Math.round(done.length/30*100)+"%";rAvg.textContent=(done.length?Math.round(done.reduce((s,x)=>s+x.minutes,0)/done.length):0)+"分";rLevel.textContent=data.amulet?.level||"小吉";reviewRows.innerHTML=logs.length?logs.map(x=>`<tr><td>${x.date}</td><td>${x.done?"✅":"休息"}</td><td>${x.done?x.activity:""}</td><td>${x.minutes}</td><td>${x.feeling||""}</td><td>${x.glucose||""}</td></tr>`).join(""):`<tr><td colspan="6">尚無打卡資料</td></tr>`}
 function renderPassport(){passportActivities.textContent=data.activities.join("、")||"尚未選擇";passportPlan.textContent=`每次 ${data.duration||"30 分鐘（建議）"}，每週 ${data.frequency||"3 次（初學推薦）"}，安排在 ${data.time||"晚餐後 30～60 分鐘"}。`;passportBackup.textContent=`若遇到「${data.barrier||"太忙沒時間"}」，替代方案是「${data.backup||"每次先走 10 分鐘"}」。`;passportAmulet.textContent=data.amulet?`${data.amulet.level}：${data.amulet.advice}`:"尚未建立御守"}
-function renderQueue(){let c=22,p=36,w=p-c;currentNo.textContent=c;waitingNo.textContent=w+"位";queueBar.style.width=Math.round(c/p*100)+"%"}
+
+let queueCurrent = Number(localStorage.getItem("prototypeQueueCurrent") || 22);
+const queuePatient = 36;
+
+function renderQueue(){
+  queueCurrent = Math.max(1, Math.min(queuePatient, queueCurrent));
+  const waiting = Math.max(queuePatient - queueCurrent, 0);
+
+  currentNo.textContent = queueCurrent;
+  waitingNo.textContent = waiting + "位";
+  queueBar.style.width = Math.round(queueCurrent / queuePatient * 100) + "%";
+
+  if(waiting === 0){
+    queueText.textContent = "已輪到您，請準備進入診間";
+    queueMode.textContent = "🔴 結束衛教並準備看診";
+  }else if(waiting <= 2){
+    queueText.textContent = "約3分鐘內，請留在診間附近";
+    queueMode.textContent = "🔴 建議：快速產生健康護照";
+  }else if(waiting <= 7){
+    queueText.textContent = "約5至10分鐘，請留意叫號";
+    queueMode.textContent = "🟡 建議：重點衛教模式";
+  }else if(waiting <= 15){
+    queueText.textContent = "約10至20分鐘，可安心互動";
+    queueMode.textContent = "🟢 建議：運動與生活目標衛教";
+  }else{
+    queueText.textContent = "候診時間充足，可完成完整流程";
+    queueMode.textContent = "🟢 建議：完整共同衛教模式";
+  }
+}
+
+function saveQueue(){
+  localStorage.setItem("prototypeQueueCurrent", String(queueCurrent));
+}
+
+function advanceQueue(step){
+  queueCurrent = Math.min(queuePatient, queueCurrent + step);
+  saveQueue();
+  renderQueue();
+}
+
+function setQueueStage(stage){
+  const stageNumbers = {
+    full: 18,
+    focus: 30,
+    passport: 34,
+    visit: 36
+  };
+  queueCurrent = stageNumbers[stage] ?? 22;
+  saveQueue();
+  renderQueue();
+
+  if(stage === "passport"){
+    show("passport");
+  }
+}
+
+function resetQueue(){
+  queueCurrent = 22;
+  saveQueue();
+  renderQueue();
+}
+
 today.textContent=new Date().toLocaleDateString("zh-TW");renderActivities();setDone(true);renderWeek();restoreAssessment();renderAmuletResult();renderAmuletEnergy();renderQueue();
 </script>
 </body>
