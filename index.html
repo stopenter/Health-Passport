@@ -8,239 +8,66 @@
 :root{
   --bg:#f5f8fb;--card:#fff;--text:#17324d;--muted:#64748b;
   --blue:#2563eb;--green:#16a34a;--orange:#ea580c;--red:#dc2626;
-  --line:#dbe5ef;--soft:#eef5ff;--yellow:#fef3c7
+  --line:#dbe5ef;--yellow:#fef3c7
 }
 *{box-sizing:border-box}
-body{font-family:"Microsoft JhengHei","Noto Sans TC",sans-serif;margin:0;background:var(--bg);color:var(--text);line-height:1.55}
-header{background:linear-gradient(135deg,#eaf2ff,#f8fbff);padding:20px;position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line)}
-.wrap{max-width:1120px;margin:auto}
-h1{margin:0;font-size:clamp(28px,4vw,42px)}
-.subtitle{color:var(--muted);font-size:18px}
-.tabs{display:flex;gap:8px;overflow:auto;margin-top:14px}
-.tabs button,.btn{border:0;border-radius:12px;padding:12px 16px;font-size:18px;font-weight:700;cursor:pointer}
-.tabs button{background:white;color:var(--text);border:1px solid var(--line);white-space:nowrap}
-.tabs button.on,.btn{background:var(--blue);color:white}
-main{padding:20px 16px 60px}
-.page{display:none}.page.on{display:block}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-.col-4{grid-column:span 4}.col-6{grid-column:span 6}.col-8{grid-column:span 8}.col-12{grid-column:span 12}
-.card{background:white;border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 7px 24px rgba(23,50,77,.06)}
-.profile{display:flex;gap:16px;align-items:center}
-.avatar{width:88px;height:88px;border-radius:24px;background:#fde7cf;display:grid;place-items:center;font-size:52px}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.kpi{text-align:center;border:1px solid var(--line);border-radius:16px;padding:14px;background:#fbfdff}
-.kpi strong{display:block;font-size:28px;margin-top:4px}
-.muted{color:var(--muted)}
-.notice{padding:14px;border-radius:14px;background:var(--yellow);color:#854d0e;font-weight:700}
-.goal{background:#ecfdf5;border:2px solid #86efac;border-radius:16px;padding:16px;font-size:20px;font-weight:700;color:#166534}
-.progress{height:14px;background:#e7edf4;border-radius:999px;overflow:hidden}
-.progress div{height:100%;background:var(--green)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Microsoft JhengHei","Noto Sans TC",sans-serif;line-height:1.55}
+header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#eaf2ff,#f8fbff);border-bottom:1px solid var(--line);padding:14px 16px}
+.wrap{max-width:1140px;margin:auto}
+h1{margin:0;font-size:clamp(26px,4vw,40px)}
+.subtitle{color:var(--muted)}
+.queue{display:grid;grid-template-columns:repeat(3,1fr) 1.6fr;gap:10px;margin-top:12px}
+.qcard,.qsummary{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;text-align:center}
+.qcard span{font-size:28px}.qcard b{display:block;font-size:24px}
+.qsummary{background:#ecfdf5;color:#166534;font-weight:800}
+.qbar{height:8px;background:#d9efe1;border-radius:999px;overflow:hidden;margin-top:7px}.qbar div{height:100%;background:var(--green)}
+.tabs{display:flex;gap:8px;overflow:auto;margin-top:12px}
+.tabs button,.btn{border:0;border-radius:12px;padding:11px 15px;font-size:17px;font-weight:800;cursor:pointer}
+.tabs button{background:#fff;color:var(--text);border:1px solid var(--line);white-space:nowrap}
+.tabs button.on,.btn{background:var(--blue);color:#fff}
+main{padding:20px 16px 60px}.page{display:none}.page.on{display:block}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}.c7{grid-column:span 7}.c8{grid-column:span 8}.c12{grid-column:span 12}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 8px 26px rgba(23,50,77,.06)}
+.profile{display:flex;gap:16px;align-items:center}.avatar{width:84px;height:84px;border-radius:22px;background:#fde7cf;display:grid;place-items:center;font-size:48px}
+.muted{color:var(--muted)}.notice{background:var(--yellow);color:#854d0e;border-radius:14px;padding:14px;font-weight:700}
+.goal{background:#ecfdf5;color:#166534;border:2px solid #86efac;border-radius:16px;padding:16px;font-size:19px;font-weight:800}
 .choice-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
-.choice{border:2px solid var(--line);background:#fff;border-radius:16px;padding:16px;font-size:18px;font-weight:700;cursor:pointer;text-align:center}
-.choice.on{border-color:var(--blue);background:#eef4ff}
-.icon{font-size:40px;display:block;margin-bottom:5px}
-label{display:block;font-weight:700;margin-top:12px}
-select,input,textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;font-size:17px}
-textarea{min-height:90px}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.secondary{background:#e8eef5;color:var(--text)}
-.week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
-.day{border:2px solid var(--line);border-radius:12px;padding:10px;text-align:center;cursor:pointer}
-.day.on{background:#ecfdf5;border-color:#22c55e}
-.omamori{max-width:520px;margin:auto;background:#b91c1c;color:#fff;border-radius:28px;padding:22px;text-align:center}
-.omamori-inner{border:3px solid #fde68a;border-radius:20px;padding:20px;background:#fffaf0;color:#7f1d1d}
-.omamori-level{font-size:46px;font-weight:900;margin:10px 0;color:#b91c1c}
-.assess-q{border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0;background:#fbfdff}
-.assess-q legend{font-size:20px;font-weight:900}
-.assess-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.assess-options label{margin:0;border:2px solid var(--line);border-radius:14px;padding:12px;background:#fff;cursor:pointer;text-align:center}
-.assess-options input{width:auto}
-.result-note{padding:14px;border-radius:14px;font-size:18px;font-weight:800;background:#fffbeb;color:#92400e}
+.choice{border:2px solid var(--line);background:#fff;border-radius:16px;padding:14px;font-size:17px;font-weight:800;cursor:pointer;text-align:center}
+.choice.on{border-color:var(--blue);background:#eef4ff}.icon{font-size:38px;display:block}
+label{display:block;font-weight:800;margin-top:12px}select,input,textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;font-size:17px}textarea{min-height:88px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.secondary{background:#e8eef5;color:var(--text)}
+.week,.follow-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.day,.follow-day{border:2px solid var(--line);border-radius:12px;padding:9px;text-align:center;background:#fff;cursor:pointer}.day.on,.follow-day.done{background:#ecfdf5;border-color:#22c55e}
+.progress{height:14px;background:#e7edf4;border-radius:999px;overflow:hidden}.progress div{height:100%;background:var(--green)}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center;background:#fff}.stat b{display:block;font-size:24px}
+.omamori{max-width:500px;margin:auto;background:#b91c1c;border-radius:28px;padding:20px;text-align:center}.omamori-inner{background:#fffaf0;color:#7f1d1d;border:3px solid #fde68a;border-radius:20px;padding:20px}.omamori-level{font-size:44px;font-weight:900}
+.assess{border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0;background:#fbfdff}.assess legend{font-size:20px;font-weight:900}.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.opts label{margin:0;border:2px solid var(--line);border-radius:14px;padding:12px;background:#fff;text-align:center;cursor:pointer}.opts label.checked{border-color:var(--blue);background:#eef4ff}.opts input{width:auto}
+.stepbar{height:16px;background:#e7edf4;border-radius:999px;overflow:hidden}.stepbar div{height:100%;background:var(--blue);transition:.25s}
+.question-status{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.pill{display:inline-block;padding:7px 11px;border-radius:999px;background:#eef4ff;color:#1d4ed8;font-weight:900}
+.result{padding:14px;border-radius:14px;font-weight:800;background:#fffbeb;color:#92400e}
+.review{width:100%;border-collapse:collapse}.review th,.review td{padding:9px;border-bottom:1px solid var(--line);text-align:left}
 .printbox{border:2px dashed #9fb4c9}
-@media(max-width:800px){
- .col-4,.col-6,.col-8{grid-column:span 12}
- .kpis{grid-template-columns:repeat(3,1fr)}
- .week{grid-template-columns:repeat(4,1fr)}
-}
-@media(max-width:560px){.kpis{grid-template-columns:1fr}.week{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:850px){.queue{grid-template-columns:repeat(2,1fr)}.qsummary{grid-column:span 2}.c4,.c5,.c6,.c7,.c8{grid-column:span 12}.stat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.queue{grid-template-columns:1fr 1fr}.week,.follow-grid{grid-template-columns:repeat(4,1fr)}}
 @media print{header,.no-print{display:none!important}.page{display:none!important}#passport{display:block!important}.card{box-shadow:none;border:none}}
-
-.global-status{
-  margin-top:14px;
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr 1.4fr;
-  gap:10px;
-  align-items:stretch;
-}
-.status-item{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:10px 12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:9px;
-  min-height:64px;
-  text-align:center;
-}
-.status-icon{font-size:28px}
-.status-copy small{display:block;color:var(--muted);font-size:14px}
-.status-copy strong{display:block;font-size:23px;line-height:1.15}
-.status-summary{
-  background:#ecfdf5;
-  border:1px solid #86efac;
-  color:#166534;
-  border-radius:14px;
-  padding:9px 12px;
-  font-weight:800;
-}
-.status-summary .mini-progress{
-  height:8px;
-  background:#d7efe0;
-  border-radius:999px;
-  overflow:hidden;
-  margin-top:7px;
-}
-.status-summary .mini-progress div{
-  height:100%;
-  width:61%;
-  background:var(--green);
-}
-.queue-alert{
-  margin-top:8px;
-  font-size:14px;
-  color:#166534;
-}
-@media(max-width:800px){
-  .global-status{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:520px){
-  .global-status{grid-template-columns:1fr 1fr}
-  .status-summary{grid-column:span 2}
-  header{padding:14px 12px}
-}
-
-
-.amulet-dashboard{
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:16px;
-}
-.amulet-energy{
-  background:linear-gradient(135deg,#fff7ed,#fff1f2);
-  border:1px solid #fed7aa;
-  border-radius:22px;
-  padding:18px;
-}
-.energy-bar{
-  height:18px;
-  background:#fde7d3;
-  border-radius:999px;
-  overflow:hidden;
-  margin:12px 0;
-}
-.energy-bar div{
-  height:100%;
-  background:linear-gradient(90deg,#f59e0b,#dc2626);
-  width:0%;
-  transition:.3s;
-}
-.stat-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-.stat-card{
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:12px;
-  text-align:center;
-  background:#fff;
-}
-.stat-card strong{
-  display:block;
-  font-size:25px;
-}
-.follow-grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:8px;
-}
-.follow-day{
-  border:1px solid var(--line);
-  border-radius:12px;
-  padding:10px 6px;
-  text-align:center;
-  background:#fff;
-}
-.follow-day.done{background:#ecfdf5;border-color:#22c55e}
-.follow-day.missed{background:#f8fafc;color:#94a3b8}
-.review-table{
-  width:100%;
-  border-collapse:collapse;
-}
-.review-table th,.review-table td{
-  border-bottom:1px solid var(--line);
-  padding:10px;
-  text-align:left;
-}
-.review-tag{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:999px;
-  background:#eef4ff;
-  color:#1d4ed8;
-  font-weight:800;
-}
-@media(max-width:800px){
-  .amulet-dashboard{grid-template-columns:1fr}
-  .stat-grid{grid-template-columns:repeat(2,1fr)}
-}
-
 </style>
 </head>
 <body>
 <header>
 <div class="wrap">
   <h1>互動式健康護照</h1>
-  <div class="subtitle">糖尿病共同衛教與健康生活御守</div>
-
-  <div class="global-status" aria-label="固定候診資訊">
-    <div class="status-item">
-      <span class="status-icon">🩺</span>
-      <div class="status-copy">
-        <small>目前叫號</small>
-        <strong id="currentNumber">22</strong>
-      </div>
-    </div>
-    <div class="status-item">
-      <span class="status-icon">👤</span>
-      <div class="status-copy">
-        <small>您的號碼</small>
-        <strong id="patientNumber">36</strong>
-      </div>
-    </div>
-    <div class="status-item">
-      <span class="status-icon">⏳</span>
-      <div class="status-copy">
-        <small>前方等候</small>
-        <strong id="waitingCount">14位</strong>
-      </div>
-    </div>
-    <div class="status-summary">
-      <div id="queueMessage">約20分鐘，可完成3至5分鐘共同衛教</div>
-      <div class="mini-progress"><div id="queueProgress"></div></div>
-      <div class="queue-alert" id="educationMode">🟢 建議：完整共同衛教模式</div>
-    </div>
+  <div class="subtitle">慢性病共同衛教與健康生活御守</div>
+  <div class="queue">
+    <div class="qcard"><span>🩺</span><small>目前叫號</small><b id="currentNo">22</b></div>
+    <div class="qcard"><span>👤</span><small>您的號碼</small><b>36</b></div>
+    <div class="qcard"><span>⏳</span><small>前方等候</small><b id="waitingNo">14位</b></div>
+    <div class="qsummary"><div id="queueText">約10至20分鐘，可安心互動</div><div class="qbar"><div id="queueBar" style="width:61%"></div></div><small id="queueMode">🟢 建議：運動與生活目標衛教</small></div>
   </div>
-
   <div class="tabs">
     <button data-p="home" class="on">健康首頁</button>
     <button data-p="plan">我的計畫</button>
     <button data-p="check">每日打卡</button>
-    <button data-p="journey">健康旅程</button>
-    <button data-p="amulet">健康生活御守</button><button data-p="review">回診追蹤</button>
+    <button data-p="amulet">健康生活御守</button>
+    <button data-p="review">回診追蹤</button>
     <button data-p="passport">帶回家護照</button>
   </div>
 </div>
@@ -249,508 +76,95 @@ textarea{min-height:90px}
 <main class="wrap">
 <section id="home" class="page on">
   <div class="grid">
-    <div class="card col-12">
-      <h2>基本資料</h2>
-      <div class="profile">
-        <div class="avatar">👩‍🌾</div>
-        <div>
-          <h3 style="margin-bottom:4px">王○○ 女士</h3>
-          <div>60歲</div>
-          <div>糖尿病共同照護</div>
-          <div class="muted">新陳代謝科門診</div>
-        </div>
-      </div>
-      <div class="notice" style="margin-top:16px">
-        只顯示共同衛教所需資訊，不呈現病歷號、電話與地址。
-      </div>
-    </div>
-<div class="card col-12">
-      <h2>近一年 HbA1c 趨勢</h2>
-      <p class="muted">一起查看糖化血色素的變化，不只看單次數值。</p>
-      <svg viewBox="0 0 920 330" style="width:100%;height:auto;display:block" role="img" aria-label="近一年糖化血色素趨勢">
-        <line x1="75" y1="40" x2="75" y2="270" stroke="#94a3b8" stroke-width="2"/>
-        <line x1="75" y1="270" x2="870" y2="270" stroke="#94a3b8" stroke-width="2"/>
-        <line x1="75" y1="205" x2="870" y2="205" stroke="#dc2626" stroke-width="2" stroke-dasharray="8 8"/>
-        <text x="802" y="196" font-size="18" fill="#dc2626">目標7%</text>
-        <g fill="#64748b" font-size="17">
-          <text x="35" y="55">10</text><text x="43" y="105">9</text><text x="43" y="155">8</text><text x="43" y="210">7</text><text x="43" y="260">6</text>
-        </g>
-        <polyline points="110,90 255,125 400,150 545,165 690,140 835,115" fill="none" stroke="#2563eb" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-        <g fill="#2563eb" stroke="#fff" stroke-width="4">
-          <circle cx="110" cy="90" r="10"/><circle cx="255" cy="125" r="10"/><circle cx="400" cy="150" r="10"/><circle cx="545" cy="165" r="10"/><circle cx="690" cy="140" r="10"/><circle cx="835" cy="115" r="10" fill="#dc2626"/>
-        </g>
-        <g fill="#17324d" font-size="18" font-weight="700" text-anchor="middle">
-          <text x="110" y="70">9.3%</text><text x="255" y="105">8.6%</text><text x="400" y="130">8.1%</text><text x="545" y="145">7.8%</text><text x="690" y="120">8.3%</text><text x="835" y="95" fill="#dc2626">8.8%</text>
-        </g>
-        <g fill="#64748b" font-size="17" text-anchor="middle">
-          <text x="110" y="300">去年8月</text><text x="255" y="300">去年10月</text><text x="400" y="300">去年12月</text><text x="545" y="300">今年2月</text><text x="690" y="300">今年4月</text><text x="835" y="300">今年6月</text>
-        </g>
-      </svg>
-      <div class="notice">最近兩次數值有回升。今天不急著責備自己，我們一起找出一項最容易開始的生活改變。</div>
-    </div>
-
-    <div class="card col-6">
-      <h2>今日提醒</h2>
-      <div class="choice-grid">
-        <button class="choice" onclick="show('plan')"><span class="icon">🚶</span>運動規劃<br><small>設定可行目標</small></button>
-        <button class="choice" onclick="show('amulet')"><span class="icon">🧧</span>健康御守<br><small>完成安全評估</small></button>
-        <button class="choice" onclick="show('check')"><span class="icon">✅</span>本週打卡<br><small>記錄完成天數</small></button>
-        <button class="choice" onclick="show('journey')"><span class="icon">📅</span>健康旅程<br><small>查看追蹤進度</small></button>
-      </div>
-    </div>
-
-    <div class="card col-6">
-      <h2>今天共同目標</h2>
-      <div class="goal">
-        ☑ 看懂近一年 HbA1c 變化<br>
-        ☑ 找出一個可改善的生活因素<br>
-        ☑ 選擇一項願意開始的運動<br>
-        ☑ 帶走個人化健康行動護照
-      </div>
-      <div class="actions"><button class="btn" onclick="show('plan')">開始共同衛教</button></div>
-    </div>
-
-    <div class="card col-12 no-print">
-      <h2>原型測試：候診進度模擬</h2>
-      <p class="muted">個管師可用下列按鈕模擬叫號前進，固定頁首會同步更新。</p>
-      <div class="actions">
-        <button class="btn secondary" onclick="advanceQueue(1)">叫號前進1號</button>
-        <button class="btn secondary" onclick="advanceQueue(3)">叫號前進3號</button>
-        <button class="btn secondary" onclick="resetQueue()">重設為22號</button>
-      </div>
-    </div>
+    <div class="card c4"><h2>基本資料</h2><div class="profile"><div class="avatar">👩‍🌾</div><div><h3>王○○ 女士</h3><div>60歲</div><div>糖尿病共同照護</div><div class="muted">新陳代謝科門診</div></div></div></div>
+    <div class="card c8"><h2>近一年 HbA1c 趨勢</h2><svg viewBox="0 0 760 280" style="width:100%"><line x1="55" y1="30" x2="55" y2="230" stroke="#94a3b8"/><line x1="55" y1="230" x2="720" y2="230" stroke="#94a3b8"/><line x1="55" y1="175" x2="720" y2="175" stroke="#dc2626" stroke-dasharray="7 7"/><text x="650" y="165" fill="#dc2626">目標7%</text><polyline points="90,70 205,105 320,130 435,145 550,120 665,95" fill="none" stroke="#2563eb" stroke-width="6"/><g fill="#2563eb"><circle cx="90" cy="70" r="8"/><circle cx="205" cy="105" r="8"/><circle cx="320" cy="130" r="8"/><circle cx="435" cy="145" r="8"/><circle cx="550" cy="120" r="8"/><circle cx="665" cy="95" r="8" fill="#dc2626"/></g><g text-anchor="middle" font-size="16"><text x="90" y="50">9.3%</text><text x="205" y="85">8.6%</text><text x="320" y="110">8.1%</text><text x="435" y="125">7.8%</text><text x="550" y="100">8.3%</text><text x="665" y="75">8.8%</text><text x="90" y="255">去年8月</text><text x="205" y="255">10月</text><text x="320" y="255">12月</text><text x="435" y="255">今年2月</text><text x="550" y="255">4月</text><text x="665" y="255">6月</text></g></svg><div class="notice">最近兩次數值有回升，我們一起找出一項容易開始的生活改變。</div></div>
   </div>
 </section>
 
 <section id="plan" class="page">
-  <div class="card">
-    <h2>選擇適合的運動</h2>
-    <p class="muted">可複選，先選願意做的方式。</p>
-    <div id="acts" class="choice-grid"></div>
-  </div>
-  <div class="card">
-    <h2>設定小目標</h2>
-    <label>每次時間</label>
-<select id="dur">
-<option>10 分鐘（開始養成）</option>
-<option>15 分鐘</option>
-<option>20 分鐘</option>
-<option selected>30 分鐘（建議）</option>
-<option>45 分鐘</option>
-<option>60 分鐘</option>
-</select>
-    <label>每週次數</label>
-<select id="freq">
-<option>2 次</option>
-<option selected>3 次（初學推薦）</option>
-<option>4 次</option>
-<option>5 次（建議）</option>
-<option>每天</option>
-</select>
-    <label>您最容易開始運動的時間</label>
-<select id="time">
-<option>早餐前（請先確認血糖）</option>
-<option>早餐後 30～60 分鐘</option>
-<option>上午空檔</option>
-<option>午餐後 30～60 分鐘</option>
-<option>下午空檔</option>
-<option>傍晚</option>
-<option selected>晚餐後 30～60 分鐘</option>
-<option>睡前伸展 5～10 分鐘</option>
-<option>依每天空閒時間安排</option>
-</select>
-    <label>可能遇到的困難</label>
-<select id="bar">
-<option>太忙沒時間</option>
-<option>工作或家務後太累</option>
-<option>容易忘記</option>
-<option>沒有人陪伴</option>
-<option>不知道做什麼運動</option>
-<option>擔心血糖太低</option>
-<option>擔心膝蓋或關節不舒服</option>
-<option>腳部容易不舒服</option>
-<option>天氣太熱或下雨</option>
-<option>沒有適合運動的地方</option>
-<option>尚未養成運動習慣</option>
-</select>
-    <label>如果原計畫做不到，可以改成</label>
-<select id="backup">
-<option>每次先走 10 分鐘</option>
-<option>分成兩次，各做 10～15 分鐘</option>
-<option>在住家附近多走一圈</option>
-<option>在家做椅子運動</option>
-<option>在家做 10 分鐘伸展</option>
-<option>下雨時改成室內走動</option>
-<option>和家人或朋友一起散步</option>
-<option>跟著運動影片一起做</option>
-<option>使用彈力帶做簡單肌力訓練</option>
-<option>今天沒完成，改到明天再做</option>
-</select>
-    <label>給自己的話</label><input id="enc" value="不用一次做到最好，只要比昨天多動一點。">
-    <div class="actions"><button class="btn" onclick="savePlan()">儲存計畫</button><button class="btn secondary" onclick="show('passport')">查看護照</button></div>
-  </div>
+  <div class="card"><h2>選擇適合的運動</h2><div id="activities" class="choice-grid"></div></div>
+  <div class="card"><h2>設定小目標</h2><label>每次時間</label><select id="duration"><option>10 分鐘（開始養成）</option><option>15 分鐘</option><option>20 分鐘</option><option selected>30 分鐘（建議）</option><option>45 分鐘</option><option>60 分鐘</option></select><label>每週次數</label><select id="frequency"><option>2 次</option><option selected>3 次（初學推薦）</option><option>4 次</option><option>5 次（建議）</option><option>每天</option></select><label>您最容易開始運動的時間</label><select id="time"><option>早餐前（請先確認血糖）</option><option>早餐後 30～60 分鐘</option><option>上午空檔</option><option>午餐後 30～60 分鐘</option><option>下午空檔</option><option>傍晚</option><option selected>晚餐後 30～60 分鐘</option><option>睡前伸展 5～10 分鐘</option><option>依每天空閒時間安排</option></select><label>可能遇到的困難</label><select id="barrier"><option>太忙沒時間</option><option>工作或家務後太累</option><option>容易忘記</option><option>沒有人陪伴</option><option>不知道做什麼運動</option><option>擔心血糖太低</option><option>擔心膝蓋或關節不舒服</option><option>腳部容易不舒服</option><option>天氣太熱或下雨</option><option>沒有適合運動的地方</option><option>尚未養成運動習慣</option></select><label>替代方案</label><select id="backup"><option>每次先走 10 分鐘</option><option>分成兩次，各做 10～15 分鐘</option><option>在住家附近多走一圈</option><option>在家做椅子運動</option><option>在家做 10 分鐘伸展</option><option>下雨時改成室內走動</option><option>和家人或朋友一起散步</option><option>跟著運動影片一起做</option><option>使用彈力帶做簡單肌力訓練</option><option>今天沒完成，改到明天再做</option></select><div class="actions"><button class="btn" onclick="savePlan()">儲存計畫</button></div></div>
 </section>
-
 
 <section id="check" class="page">
   <div class="grid">
-    <div class="card col-7" style="grid-column:span 7">
-      <h2>今日運動打卡</h2>
-      <p class="muted">每日約30秒，打卡結果會同步累積到健康生活御守。</p>
-
-      <label>今天有運動嗎？</label>
-      <div class="choice-grid" id="exerciseDoneChoices">
-        <button class="choice" data-value="yes" onclick="chooseExerciseDone('yes')"><span class="icon">✅</span>有完成</button>
-        <button class="choice" data-value="no" onclick="chooseExerciseDone('no')"><span class="icon">🌱</span>今天休息</button>
-      </div>
-
-      <label>今天運動多久？</label>
-      <select id="checkMinutes">
-        <option value="0">未運動</option>
-        <option value="10">10分鐘</option>
-        <option value="20" selected>20分鐘</option>
-        <option value="30">30分鐘</option>
-        <option value="40">40分鐘以上</option>
-      </select>
-
-      <label>今天做了什麼？</label>
-      <select id="checkActivity">
-        <option>快走</option>
-        <option>市場多走一圈</option>
-        <option>伸展運動</option>
-        <option>扶椅抬腿</option>
-        <option>騎腳踏車</option>
-        <option>其他活動</option>
-      </select>
-
-      <label>今天運動後的感受</label>
-      <div id="feel" class="choice-grid"></div>
-
-      <label>今日血糖，可略過</label>
-      <input id="checkGlucose" type="number" min="40" max="600" placeholder="例如 135">
-
-      <label>今天想記下什麼？</label>
-      <textarea id="note" placeholder="例如：收攤後和先生走了20分鐘。"></textarea>
-
-      <div class="actions">
-        <button class="btn" onclick="saveDailyCheckin()">儲存今日打卡</button>
-      </div>
-    </div>
-
-    <div class="card col-5" style="grid-column:span 5">
-      <h2>本週紀錄</h2>
-      <div id="week" class="week"></div>
-      <div class="progress" style="margin-top:14px"><div id="prog"></div></div>
-      <p id="pt"></p>
-      <div class="goal" id="amuletSyncText">完成打卡後，御守能量會同步更新。</div>
-    </div>
+    <div class="card c7"><h2>今日運動打卡</h2><div class="choice-grid"><button class="choice" id="doneYes" onclick="setDone(true)">✅ 有完成</button><button class="choice" id="doneNo" onclick="setDone(false)">🌱 今天休息</button></div><label>運動多久</label><select id="minutes"><option value="0">未運動</option><option>10</option><option selected>20</option><option>30</option><option>45</option><option>60</option></select><label>活動類型</label><select id="activityToday"></select><label>運動後感受</label><select id="feeling"><option>很舒服</option><option>有點累</option><option>很有成就感</option><option>不太舒服</option></select><label>今日血糖，可略過</label><input id="glucose" type="number" placeholder="例如135"><label>備註</label><textarea id="checkNote"></textarea><div class="actions"><button class="btn" onclick="saveCheckin()">儲存今日打卡</button></div></div>
+    <div class="card c5"><h2>本週紀錄</h2><div id="week" class="week"></div><div class="progress" style="margin-top:14px"><div id="weekBar"></div></div><p id="weekText"></p></div>
   </div>
 </section>
-
-<section id="journey" class="page">
-  <div class="card"><h2>我的健康旅程</h2><div class="choice-grid"><div class="kpi"><strong>今天</strong>完成共同衛教</div><div class="kpi"><strong>1個月後</strong>檢視運動情況</div><div class="kpi"><strong>3個月後</strong>追蹤HbA1c</div><div class="kpi"><strong>持續追蹤</strong>調整計畫</div></div></div>
-  <div class="card goal" id="sum"></div>
-</section>
-
 
 <section id="amulet" class="page">
-  <div class="amulet-dashboard">
-    <div class="amulet-energy">
-      <h2>會成長的健康生活御守</h2>
-      <p class="muted">每日打卡會累積御守能量，回診時可和個管師一起回顧。</p>
-      <div class="omamori">
-        <div class="omamori-inner">
-          <h3>健康生活御守</h3>
-          <div id="amuletLevel" class="omamori-level">小吉</div>
-          <div id="amuletPoem" style="font-size:21px;font-weight:800;line-height:1.8">先踏一小步<br>日日有進步</div>
-        </div>
-      </div>
-      <div class="energy-bar"><div id="amuletEnergyBar"></div></div>
-      <p id="amuletEnergyText" style="font-weight:800;text-align:center">御守能量 0%</p>
-      <div id="amuletAdvice" class="result-note">每天完成一次健康行動，御守就會累積能量。</div>
+  <div class="grid">
+    <div class="card c7">
+      <div class="question-status"><div><h2 style="margin:0">健康生活御守評估</h2><span class="pill" id="questionCount">已完成 0 / 5 題</span></div><div style="min-width:240px;flex:1"><div class="stepbar"><div id="questionBar" style="width:0%"></div></div></div></div>
+      <p class="muted">每完成一題會立即儲存。若有漏答，系統會指出缺少哪一題，不再只顯示籠統提醒。</p>
+      <form id="amuletForm">
+        <fieldset class="assess" data-q="1"><legend>1. 今天是否有胸痛、昏厥或休息時明顯喘不過氣？</legend><div class="opts"><label><input type="radio" name="q1" value="0">沒有</label><label><input type="radio" name="q1" value="99">有</label></div></fieldset>
+        <fieldset class="assess" data-q="2"><legend>2. 今天是否有冒冷汗、發抖、頭暈等低血糖症狀？</legend><div class="opts"><label><input type="radio" name="q2" value="0">沒有</label><label><input type="radio" name="q2" value="99">有</label></div></fieldset>
+        <fieldset class="assess" data-q="3"><legend>3. 腳部是否有新傷口、水泡、紅腫或疼痛？</legend><div class="opts"><label><input type="radio" name="q3" value="0">沒有</label><label><input type="radio" name="q3" value="99">有</label></div></fieldset>
+        <fieldset class="assess" data-q="4"><legend>4. 過去一週有幾天做至少10分鐘活動？</legend><div class="opts"><label><input type="radio" name="q4" value="3">0天</label><label><input type="radio" name="q4" value="2">1至2天</label><label><input type="radio" name="q4" value="1">3至4天</label><label><input type="radio" name="q4" value="0">5天以上</label></div></fieldset>
+        <fieldset class="assess" data-q="5"><legend>5. 對未來一週開始運動，信心有多少？</legend><div class="opts"><label><input type="radio" name="q5" value="3">還沒準備好</label><label><input type="radio" name="q5" value="2">有一點信心</label><label><input type="radio" name="q5" value="1">有信心</label><label><input type="radio" name="q5" value="0">非常有信心</label></div></fieldset>
+        <div id="missingNotice" class="notice" style="display:none"></div>
+        <div class="actions"><button type="button" class="btn" id="drawBtn" onclick="drawAmulet()" disabled>建立我的健康御守</button><button type="button" class="btn secondary" onclick="resetAssessment()">重新評估</button></div>
+      </form>
     </div>
-
-    <div class="card" style="margin:0">
-      <h2>近7日御守紀錄</h2>
-      <div id="amuletWeek" class="follow-grid"></div>
-      <div class="stat-grid" style="margin-top:16px">
-        <div class="stat-card"><small>完成天數</small><strong id="amuletDoneDays">0</strong></div>
-        <div class="stat-card"><small>完成率</small><strong id="amuletRate">0%</strong></div>
-        <div class="stat-card"><small>總分鐘</small><strong id="amuletMinutes">0</strong></div>
-        <div class="stat-card"><small>連續天數</small><strong id="amuletStreak">0</strong></div>
-      </div>
-      <div class="actions">
-        <button class="btn" onclick="show('check')">前往今日打卡</button>
-        <button class="btn secondary" onclick="show('review')">查看回診摘要</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="card" style="margin-top:16px">
-    <h2>第一次建立御守</h2>
-    <p class="muted">完成簡易運動安全與行動準備評估，產生初始籤詩。之後由每日打卡持續升級。</p>
-    <form id="amuletForm">
-      <fieldset class="assess-q"><legend>今天是否有胸痛、昏厥或休息時明顯喘不過氣？</legend><div class="assess-options"><label><input type="radio" name="r1" value="0">沒有</label><label><input type="radio" name="r1" value="99">有</label></div></fieldset>
-      <fieldset class="assess-q"><legend>今天是否有冒冷汗、發抖、頭暈等低血糖症狀？</legend><div class="assess-options"><label><input type="radio" name="r2" value="0">沒有</label><label><input type="radio" name="r2" value="99">有</label></div></fieldset>
-      <fieldset class="assess-q"><legend>腳部是否有新傷口、水泡、紅腫或疼痛？</legend><div class="assess-options"><label><input type="radio" name="r3" value="0">沒有</label><label><input type="radio" name="r3" value="99">有</label></div></fieldset>
-      <fieldset class="assess-q"><legend>過去一週有幾天做至少10分鐘活動？</legend><div class="assess-options"><label><input type="radio" name="days" value="3">0天</label><label><input type="radio" name="days" value="2">1至2天</label><label><input type="radio" name="days" value="1">3至4天</label><label><input type="radio" name="days" value="0">5天以上</label></div></fieldset>
-      <fieldset class="assess-q"><legend>對未來一週開始運動，信心有多少？</legend><div class="assess-options"><label><input type="radio" name="conf" value="3">還沒準備好</label><label><input type="radio" name="conf" value="2">有一點信心</label><label><input type="radio" name="conf" value="1">有信心</label><label><input type="radio" name="conf" value="0">非常有信心</label></div></fieldset>
-      <div class="actions">
-        <button type="button" class="btn" onclick="drawAmulet()">建立我的健康御守</button>
-      </div>
-    </form>
+    <div class="card c5"><div class="omamori"><div class="omamori-inner"><h3>健康生活御守</h3><div id="amuletLevel" class="omamori-level">等待評估</div><div id="amuletPoem" style="font-size:21px;font-weight:800;line-height:1.8">一步一腳印<br>健康自然來</div></div></div><div id="amuletAdvice" class="result" style="margin-top:14px">完成全部題目後即可建立御守。</div><div style="margin-top:16px"><h3>近30日御守能量</h3><div class="progress"><div id="amuletEnergy"></div></div><p id="amuletEnergyText"></p></div></div>
   </div>
 </section>
 
-
 <section id="review" class="page">
-  <div class="grid">
-    <div class="card col-12">
-      <h2>回診追蹤摘要</h2>
-      <p class="muted">個管師可快速檢視病人的運動執行、常見阻礙與自我感受。</p>
-      <div class="stat-grid">
-        <div class="stat-card"><small>近30日完成</small><strong id="reviewDone">0天</strong></div>
-        <div class="stat-card"><small>完成率</small><strong id="reviewRate">0%</strong></div>
-        <div class="stat-card"><small>平均時間</small><strong id="reviewAverage">0分</strong></div>
-        <div class="stat-card"><small>目前御守</small><strong id="reviewLevel">小吉</strong></div>
-      </div>
-    </div>
-
-    <div class="card col-7" style="grid-column:span 7">
-      <h2>最近打卡明細</h2>
-      <div style="overflow:auto">
-        <table class="review-table">
-          <thead><tr><th>日期</th><th>完成</th><th>活動</th><th>分鐘</th><th>感受</th><th>血糖</th></tr></thead>
-          <tbody id="reviewRows"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="card col-5" style="grid-column:span 5">
-      <h2>下次共同討論</h2>
-      <p><span class="review-tag">最常活動</span> <strong id="reviewTopActivity">尚無資料</strong></p>
-      <p><span class="review-tag">常見感受</span> <strong id="reviewTopFeeling">尚無資料</strong></p>
-      <p><span class="review-tag">最近留言</span></p>
-      <div class="notice" id="reviewLatestNote">尚無打卡留言。</div>
-      <label>個管師追蹤備註</label>
-      <textarea id="managerNote" placeholder="例如：下次回診確認足部不適及運動時間安排。"></textarea>
-      <button class="btn" onclick="saveManagerNote()">儲存追蹤備註</button>
-    </div>
-  </div>
+  <div class="card"><h2>回診追蹤摘要</h2><div class="stat-grid"><div class="stat"><small>近30日完成</small><b id="rDone">0天</b></div><div class="stat"><small>完成率</small><b id="rRate">0%</b></div><div class="stat"><small>平均時間</small><b id="rAvg">0分</b></div><div class="stat"><small>目前御守</small><b id="rLevel">小吉</b></div></div></div><div class="card"><table class="review"><thead><tr><th>日期</th><th>完成</th><th>活動</th><th>分鐘</th><th>感受</th><th>血糖</th></tr></thead><tbody id="reviewRows"></tbody></table></div>
 </section>
 
 <section id="passport" class="page">
-  <div class="card printbox"><h2>我的健康行動護照</h2><p><b>姓名：</b>王○○　<b>日期：</b><span id="today"></span></p><h3>我選擇的運動</h3><div id="pa" class="goal"></div><h3>我的行動計畫</h3><p id="pp"></p><h3>遇到困難時</h3><p id="pb"></p><h3>本週紀錄</h3><div id="pw" class="week"></div><h3>給自己的話</h3><p id="pe"></p><div class="actions no-print"><button class="btn" onclick="print()">列印或另存PDF</button></div></div>
+  <div class="card printbox"><h2>我的健康行動護照</h2><p><b>姓名：</b>王○○　<b>日期：</b><span id="today"></span></p><h3>我選擇的運動</h3><div id="passportActivities" class="goal"></div><h3>我的行動計畫</h3><p id="passportPlan"></p><h3>遇到困難時</h3><p id="passportBackup"></p><h3>我的健康御守</h3><p id="passportAmulet"></p><div class="actions no-print"><button class="btn" onclick="print()">列印或另存PDF</button></div></div>
 </section>
 </main>
 
 <script>
-const opts=[
-["快走","🚶"],
-["市場多走一圈","🛒"],
-["健走","🥾"],
-["公園散步","🌳"],
-["伸展運動","🙆‍♀️"],
-["彈力帶肌力訓練","💪"],
-["扶椅抬腿","🪑"],
-["坐姿體操","🧘"],
-["太極拳","☯️"],
-["八段錦","🍃"],
-["超慢跑","🏃"],
-["騎腳踏車","🚲"],
-["游泳或水中運動","🏊"],
-["爬樓梯","🪜"],
-["廣場舞／健康舞","💃"],
-["跟音樂律動","🎵"],
-["園藝活動","🌼"],
-["家務活動","🧹"]
-];
-const feelings=[["很舒服","🙂"],["有點累","😅"],["有成就感","😊"],["不太舒服","😣"]];
-let d=JSON.parse(localStorage.getItem("hp2")||"{}");d.a=d.a||["市場多走一圈","快走"];d.days=d.days||[];
-function sv(){localStorage.setItem("hp2",JSON.stringify(d))}
-function show(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("on"));document.getElementById(id).classList.add("on");document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x.dataset.p===id));if(id==="passport")rp();scrollTo(0,0)}
+const activityOptions=["快走","市場多走一圈","健走","公園散步","伸展運動","彈力帶肌力訓練","扶椅抬腿","坐姿體操","太極拳","八段錦","超慢跑","騎腳踏車","游泳或水中運動","爬樓梯","廣場舞／健康舞","跟音樂律動","園藝活動","家務活動"];
+let data=JSON.parse(localStorage.getItem("healthPassportStable")||"{}");
+data.activities=data.activities||["快走"];data.logs=data.logs||[];data.assessment=data.assessment||{};let doneToday=true;
+function save(){localStorage.setItem("healthPassportStable",JSON.stringify(data))}
+function show(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("on"));document.getElementById(id).classList.add("on");document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x.dataset.p===id));if(id==="review")renderReview();if(id==="passport")renderPassport();scrollTo(0,0)}
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>show(b.dataset.p));
-function ra(){acts.innerHTML=opts.map(x=>`<button class="choice ${d.a.includes(x[0])?"on":""}" onclick="ta('${x[0]}')"><span class="icon">${x[1]}</span>${x[0]}</button>`).join("")}
-function ta(x){d.a=d.a.includes(x)?d.a.filter(y=>y!==x):[...d.a,x];sv();ra();rp()}
-function rf(){feel.innerHTML=feelings.map(x=>`<button class="choice ${d.f===x[0]?"on":""}" onclick="sf('${x[0]}')"><span class="icon">${x[1]}</span>${x[0]}</button>`).join("")}
-function sf(x){d.f=x;sv();rf()}
-function rw(){let n=["一","二","三","四","五","六","日"];week.innerHTML=n.map((x,i)=>`<div class="day ${d.days.includes(i)?"on":""}" onclick="td(${i})">${x}<div>${d.days.includes(i)?"✅":"○"}</div></div>`).join("");pw.innerHTML=n.map((x,i)=>`<div class="day ${d.days.includes(i)?"on":""}">${x}<div>${d.days.includes(i)?"✅":"□"}</div></div>`).join("");let p=Math.round(d.days.length/7*100);prog.style.width=p+"%";pt.textContent=`本週完成 ${d.days.length} 天，完成率 ${p}%`;sum.textContent=`目前已完成 ${d.days.length} 天運動紀錄。每一次完成都值得肯定。`}
-function td(i){d.days=d.days.includes(i)?d.days.filter(x=>x!==i):[...d.days,i];sv();rw()}
-function savePlan(){d.dur=dur.value;d.freq=freq.value;d.time=time.value;d.bar=bar.value;d.backup=backup.value;d.enc=enc.value;sv();rp();alert("已儲存")}
-function saveCheck(){d.note=note.value;sv();alert("已儲存")}
-function rp(){pa.textContent=d.a.join("、")||"尚未選擇";pp.textContent=`每次 ${d.dur||"30 分鐘（建議）"}，每週 ${d.freq||"3 次（初學推薦）"}，安排在 ${d.time||"晚餐後 30～60 分鐘"}。`;pb.textContent=`若遇到「${d.bar||"太忙沒時間"}」，替代方案是「${d.backup||"每次先走 10 分鐘"}」。`;pe.textContent=d.enc||"不用一次做到最好，只要比昨天多動一點。"}
-function val(n){const e=document.querySelector(`input[name="${n}"]:checked`);return e?Number(e.value):null}
-function drawAmulet(){const names=["r1","r2","r3","days","tol","conf"];if(names.some(n=>val(n)===null)){alert("請完成全部題目");return}let level,poem,advice;if(["r1","r2","r3"].some(n=>val(n)>=99)){level="慎行";poem="今日先安身<br>評估再啟程";advice="目前有安全警訊，今天先不要開始新的運動，請先告知醫療人員。"}else{const s=val("days")+val("tol")+val("conf");if(s<=2){level="大吉";poem="步履穩而明<br>日日添康寧";advice="可從快走或市場多走一圈開始，每次20分鐘，每週3次。"}else if(s<=5){level="中吉";poem="緩步亦為進<br>持續便成真";advice="先從每次10至15分鐘、每週2至3次開始。"}else{level="小吉";poem="先解心中礙<br>小步自花開";advice="先選扶椅抬腿或室內伸展，每次5至10分鐘，並和個管師討論阻礙。"}}amuletLevel.textContent=level;amuletPoem.innerHTML=poem;amuletAdvice.textContent=advice}
-function resetAmulet(){amuletLevel.textContent="等待抽籤";amuletPoem.innerHTML="一步一腳印<br>健康自然來";amuletAdvice.textContent="完成評估後，系統會產生籤詩與運動建議。"}
-today.textContent=new Date().toLocaleDateString("zh-TW");dur.value=d.dur||"30 分鐘（建議）";freq.value=d.freq||"3 次（初學推薦）";time.value=d.time||"晚餐後 30～60 分鐘";bar.value=d.bar||"太忙沒時間";backup.value=d.backup||"每次先走 10 分鐘";enc.value=d.enc||"不用一次做到最好，只要比昨天多動一點。";ra();rf();rw();rp();
-
-let queueCurrent=Number(localStorage.getItem("queueCurrent")||22);
-const queuePatient=36;
-
-function renderQueue(){
-  queueCurrent=Math.min(queuePatient,Math.max(1,queueCurrent));
-  const waiting=Math.max(queuePatient-queueCurrent,0);
-  document.getElementById("currentNumber").textContent=queueCurrent;
-  document.getElementById("patientNumber").textContent=queuePatient;
-  document.getElementById("waitingCount").textContent=waiting+"位";
-
-  const progress=Math.min(100,Math.round(queueCurrent/queuePatient*100));
-  document.getElementById("queueProgress").style.width=progress+"%";
-
-  let message,mode;
-  if(waiting===0){
-    message="已輪到您，請準備進入診間";
-    mode="🔴 立即結束衛教，準備看診";
-  }else if(waiting<=2){
-    message="約3分鐘內，請留在診間附近";
-    mode="🔴 建議：快速產生健康護照";
-  }else if(waiting<=7){
-    message="約5至10分鐘，請留意叫號";
-    mode="🟡 建議：重點衛教模式";
-  }else if(waiting<=15){
-    message="約10至20分鐘，可安心互動";
-    mode="🟢 建議：運動與生活目標衛教";
-  }else{
-    message="候診時間充足，可完成完整流程";
-    mode="🟢 建議：完整共同衛教模式";
-  }
-  document.getElementById("queueMessage").textContent=message;
-  document.getElementById("educationMode").textContent=mode;
+function renderActivities(){activities.innerHTML=activityOptions.map(x=>`<button class="choice ${data.activities.includes(x)?"on":""}" onclick="toggleActivity('${x}')">${x}</button>`).join("");activityToday.innerHTML=activityOptions.map(x=>`<option>${x}</option>`).join("")}
+function toggleActivity(x){data.activities=data.activities.includes(x)?data.activities.filter(y=>y!==x):[...data.activities,x];save();renderActivities()}
+function savePlan(){data.duration=duration.value;data.frequency=frequency.value;data.time=time.value;data.barrier=barrier.value;data.backup=backup.value;save();alert("計畫已儲存")}
+function setDone(v){doneToday=v;doneYes.classList.toggle("on",v);doneNo.classList.toggle("on",!v);if(!v)minutes.value="0"}
+function dateKey(d=new Date()){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function saveCheckin(){const log={date:dateKey(),done:doneToday,minutes:doneToday?Number(minutes.value):0,activity:activityToday.value,feeling:feeling.value,glucose:glucose.value,note:checkNote.value};data.logs=data.logs.filter(x=>x.date!==log.date);data.logs.push(log);save();renderWeek();renderAmuletEnergy();alert(doneToday?"今天完成了，御守能量增加！":"今天休息也沒關係，明天重新開始。")}
+function lastDates(n){const a=[];for(let i=n-1;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);a.push(dateKey(d))}return a}
+function renderWeek(){const map=new Map(data.logs.map(x=>[x.date,x]));week.innerHTML=lastDates(7).map(k=>`<div class="day ${map.get(k)?.done?"on":""}">${k.slice(5).replace("-","/")}<div>${map.get(k)?.done?"✅":"○"}</div></div>`).join("");const done=data.logs.filter(x=>lastDates(7).includes(x.date)&&x.done).length;weekBar.style.width=Math.round(done/7*100)+"%";weekText.textContent=`本週完成 ${done} 天`}
+function assessmentGroups(){return ["q1","q2","q3","q4","q5"]}
+function selected(name){const e=document.querySelector(`input[name="${name}"]:checked`);return e?e.value:null}
+function restoreAssessment(){assessmentGroups().forEach(n=>{const v=data.assessment[n];if(v!==undefined){const e=document.querySelector(`input[name="${n}"][value="${v}"]`);if(e)e.checked=true}});updateAssessmentProgress()}
+function updateAssessmentProgress(){
+  let completed=0;const missing=[];
+  assessmentGroups().forEach((n,i)=>{const v=selected(n);if(v!==null){completed++;data.assessment[n]=v}else{missing.push(i+1)}});
+  save();
+  questionCount.textContent=`已完成 ${completed} / 5 題`;questionBar.style.width=(completed/5*100)+"%";drawBtn.disabled=completed!==5;
+  missingNotice.style.display=completed===5?"none":"block";
+  missingNotice.textContent=completed===5?"":`尚未完成：第 ${missing.join("、")} 題`;
+  document.querySelectorAll(".opts label").forEach(l=>l.classList.toggle("checked",!!l.querySelector("input:checked")));
 }
-function advanceQueue(step){
-  queueCurrent=Math.min(queuePatient,queueCurrent+step);
-  localStorage.setItem("queueCurrent",queueCurrent);
-  renderQueue();
+document.querySelectorAll('#amuletForm input[type="radio"]').forEach(e=>e.addEventListener("change",updateAssessmentProgress));
+function drawAmulet(){
+  const missing=assessmentGroups().filter(n=>selected(n)===null);
+  if(missing.length){missingNotice.style.display="block";missingNotice.textContent=`請先完成第 ${missing.map(x=>x.replace("q","")).join("、")} 題`;return}
+  const danger=["q1","q2","q3"].some(n=>Number(selected(n))===99);
+  let level,poem,advice;
+  if(danger){level="慎行";poem="今日先安身<br>評估再啟程";advice="目前有安全警訊，今天先不要開始新的運動，請先告知醫療人員。"}
+  else{const s=Number(selected("q4"))+Number(selected("q5"));if(s<=1){level="大吉";poem="步履穩而明<br>日日添康寧";advice="可開始規律輕至中等強度活動。"}else if(s<=3){level="中吉";poem="緩步亦為進<br>持續便成真";advice="建議先從每次10至15分鐘開始。"}else{level="小吉";poem="先解心中礙<br>小步自花開";advice="先選簡單且安全的活動，從5至10分鐘開始。"}}
+  data.amulet={level,poem,advice};save();renderAmuletResult();renderPassport()
 }
-function resetQueue(){
-  queueCurrent=22;
-  localStorage.setItem("queueCurrent",queueCurrent);
-  renderQueue();
-}
-renderQueue();
-
-
-d.logs=d.logs||[];
-d.managerNote=d.managerNote||"";
-let exerciseDoneChoice="yes";
-
-function todayKey(){
-  const x=new Date();
-  return x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0");
-}
-function chooseExerciseDone(v){
-  exerciseDoneChoice=v;
-  document.querySelectorAll("#exerciseDoneChoices .choice").forEach(b=>b.classList.toggle("on",b.dataset.value===v));
-  if(v==="no") document.getElementById("checkMinutes").value="0";
-}
-function saveDailyCheckin(){
-  const key=todayKey();
-  const log={
-    date:key,
-    done:exerciseDoneChoice==="yes",
-    minutes:Number(document.getElementById("checkMinutes").value||0),
-    activity:document.getElementById("checkActivity").value,
-    feeling:d.f||"",
-    glucose:document.getElementById("checkGlucose").value||"",
-    note:document.getElementById("note").value.trim()
-  };
-  if(!log.done) log.minutes=0;
-  d.logs=d.logs.filter(x=>x.date!==key);
-  d.logs.push(log);
-  d.logs.sort((a,b)=>a.date.localeCompare(b.date));
-  sv();
-  renderAllTracking();
-  alert(log.done?"今天完成了，御守能量增加！":"今天休息也沒關係，明天重新開始。");
-}
-function lastNDates(n){
-  const arr=[];
-  for(let i=n-1;i>=0;i--){
-    const x=new Date();x.setDate(x.getDate()-i);
-    arr.push(x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0"));
-  }
-  return arr;
-}
-function calcStreak(){
-  let streak=0;
-  const logs=new Map(d.logs.map(x=>[x.date,x]));
-  for(let i=0;i<365;i++){
-    const x=new Date();x.setDate(x.getDate()-i);
-    const k=x.getFullYear()+"-"+String(x.getMonth()+1).padStart(2,"0")+"-"+String(x.getDate()).padStart(2,"0");
-    const log=logs.get(k);
-    if(log&&log.done) streak++; else if(i===0&&!log) continue; else break;
-  }
-  return streak;
-}
-function amuletState(){
-  const dates=lastNDates(30);
-  const logs=d.logs.filter(x=>dates.includes(x.date));
-  const done=logs.filter(x=>x.done).length;
-  const minutes=logs.reduce((s,x)=>s+(x.minutes||0),0);
-  const rate=Math.round(done/30*100);
-  let level="小吉",poem="先踏一小步<br>日日有進步";
-  if(rate>=70){level="大吉";poem="步履穩而明<br>日日添康寧";}
-  else if(rate>=40){level="中吉";poem="緩步亦為進<br>持續便成真";}
-  return {done,minutes,rate,level,poem,streak:calcStreak()};
-}
-function renderAmuletTracking(){
-  const s=amuletState();
-  document.getElementById("amuletLevel").textContent=s.level;
-  document.getElementById("amuletPoem").innerHTML=s.poem;
-  document.getElementById("amuletEnergyBar").style.width=s.rate+"%";
-  document.getElementById("amuletEnergyText").textContent="御守能量 "+s.rate+"%";
-  document.getElementById("amuletDoneDays").textContent=s.done;
-  document.getElementById("amuletRate").textContent=s.rate+"%";
-  document.getElementById("amuletMinutes").textContent=s.minutes;
-  document.getElementById("amuletStreak").textContent=s.streak;
-  const map=new Map(d.logs.map(x=>[x.date,x]));
-  document.getElementById("amuletWeek").innerHTML=lastNDates(7).map(k=>{
-    const x=map.get(k),day=k.slice(5).replace("-","/");
-    return `<div class="follow-day ${x&&x.done?"done":"missed"}"><small>${day}</small><div style="font-size:26px">${x&&x.done?"✅":"○"}</div><small>${x&&x.done?(x.minutes+"分"):"未完成"}</small></div>`;
-  }).join("");
-  document.getElementById("amuletAdvice").textContent=
-    s.level==="大吉"?"持續得很好，下次回診可一起討論如何維持。":
-    s.level==="中吉"?"已建立部分習慣，建議固定時段並準備雨天替代方案。":
-    "先從每次5至10分鐘開始，完成比完美更重要。";
-  const sync=document.getElementById("amuletSyncText");
-  if(sync) sync.textContent=`目前御守為${s.level}，近30日完成${s.done}天，累積${s.minutes}分鐘。`;
-}
-function topValue(items){
-  if(!items.length)return "尚無資料";
-  const c={};items.forEach(x=>c[x]=(c[x]||0)+1);
-  return Object.entries(c).sort((a,b)=>b[1]-a[1])[0][0];
-}
-function renderReview(){
-  const dates=lastNDates(30);
-  const logs=d.logs.filter(x=>dates.includes(x.date)).sort((a,b)=>b.date.localeCompare(a.date));
-  const doneLogs=logs.filter(x=>x.done);
-  const s=amuletState();
-  document.getElementById("reviewDone").textContent=s.done+"天";
-  document.getElementById("reviewRate").textContent=s.rate+"%";
-  document.getElementById("reviewAverage").textContent=(doneLogs.length?Math.round(doneLogs.reduce((a,x)=>a+x.minutes,0)/doneLogs.length):0)+"分";
-  document.getElementById("reviewLevel").textContent=s.level;
-  document.getElementById("reviewTopActivity").textContent=topValue(doneLogs.map(x=>x.activity));
-  document.getElementById("reviewTopFeeling").textContent=topValue(logs.map(x=>x.feeling).filter(Boolean));
-  document.getElementById("reviewLatestNote").textContent=(logs.find(x=>x.note)||{}).note||"尚無打卡留言。";
-  document.getElementById("managerNote").value=d.managerNote||"";
-  document.getElementById("reviewRows").innerHTML=logs.length?logs.slice(0,12).map(x=>`<tr><td>${x.date}</td><td>${x.done?"✅":"休息"}</td><td>${x.done?x.activity:""}</td><td>${x.minutes||0}</td><td>${x.feeling||""}</td><td>${x.glucose||""}</td></tr>`).join(""):`<tr><td colspan="6">尚無打卡資料</td></tr>`;
-}
-function saveManagerNote(){
-  d.managerNote=document.getElementById("managerNote").value.trim();
-  sv();alert("追蹤備註已儲存");
-}
-function renderAllTracking(){
-  renderAmuletTracking();
-  renderReview();
-  rw();
-}
-const oldShow=show;
-show=function(id){
-  oldShow(id);
-  if(id==="amulet"||id==="review"||id==="check") renderAllTracking();
-};
-renderAllTracking();
-chooseExerciseDone("yes");
-
+function renderAmuletResult(){const a=data.amulet||{};amuletLevel.textContent=a.level||"等待評估";amuletPoem.innerHTML=a.poem||"一步一腳印<br>健康自然來";amuletAdvice.textContent=a.advice||"完成全部題目後即可建立御守。"}
+function resetAssessment(){data.assessment={};delete data.amulet;save();amuletForm.reset();updateAssessmentProgress();renderAmuletResult()}
+function renderAmuletEnergy(){const done=data.logs.filter(x=>lastDates(30).includes(x.date)&&x.done).length;const rate=Math.round(done/30*100);amuletEnergy.style.width=rate+"%";amuletEnergyText.textContent=`近30日完成 ${done} 天，御守能量 ${rate}%`}
+function renderReview(){const logs=data.logs.filter(x=>lastDates(30).includes(x.date)).sort((a,b)=>b.date.localeCompare(a.date));const done=logs.filter(x=>x.done);rDone.textContent=done.length+"天";rRate.textContent=Math.round(done.length/30*100)+"%";rAvg.textContent=(done.length?Math.round(done.reduce((s,x)=>s+x.minutes,0)/done.length):0)+"分";rLevel.textContent=data.amulet?.level||"小吉";reviewRows.innerHTML=logs.length?logs.map(x=>`<tr><td>${x.date}</td><td>${x.done?"✅":"休息"}</td><td>${x.done?x.activity:""}</td><td>${x.minutes}</td><td>${x.feeling||""}</td><td>${x.glucose||""}</td></tr>`).join(""):`<tr><td colspan="6">尚無打卡資料</td></tr>`}
+function renderPassport(){passportActivities.textContent=data.activities.join("、")||"尚未選擇";passportPlan.textContent=`每次 ${data.duration||"30 分鐘（建議）"}，每週 ${data.frequency||"3 次（初學推薦）"}，安排在 ${data.time||"晚餐後 30～60 分鐘"}。`;passportBackup.textContent=`若遇到「${data.barrier||"太忙沒時間"}」，替代方案是「${data.backup||"每次先走 10 分鐘"}」。`;passportAmulet.textContent=data.amulet?`${data.amulet.level}：${data.amulet.advice}`:"尚未建立御守"}
+function renderQueue(){let c=22,p=36,w=p-c;currentNo.textContent=c;waitingNo.textContent=w+"位";queueBar.style.width=Math.round(c/p*100)+"%"}
+today.textContent=new Date().toLocaleDateString("zh-TW");renderActivities();setDone(true);renderWeek();restoreAssessment();renderAmuletResult();renderAmuletEnergy();renderQueue();
 </script>
 </body>
 </html>
