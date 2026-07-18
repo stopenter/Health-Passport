@@ -95,6 +95,22 @@ label{display:block;font-weight:800;margin-top:12px}select,input,textarea{width:
   color:var(--muted);
 }
 
+
+.exercise-card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.exercise-card{position:relative;border:2px solid var(--line);background:#fff;border-radius:18px;padding:16px;min-height:205px;cursor:pointer;text-align:left;transition:.18s;box-shadow:0 4px 14px rgba(23,50,77,.04)}
+.exercise-card:hover{transform:translateY(-2px);border-color:#93c5fd;box-shadow:0 8px 20px rgba(37,99,235,.10)}
+.exercise-card.on{border-color:var(--blue);background:#eef4ff;box-shadow:0 0 0 4px rgba(37,99,235,.08)}
+.exercise-card .checkmark{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;background:#fff;color:#fff;font-weight:900}
+.exercise-card.on .checkmark{background:var(--blue);border-color:var(--blue)}
+.exercise-icon{font-size:48px;line-height:1;margin-bottom:10px}
+.exercise-name{font-size:22px;font-weight:900}
+.exercise-stars{color:#f59e0b;letter-spacing:1px;margin-top:5px;font-size:17px}
+.exercise-tag{display:inline-block;margin-top:7px;padding:5px 9px;border-radius:999px;background:#ecfdf5;color:#166534;font-size:14px;font-weight:900}
+.exercise-time{margin-top:9px;font-weight:800}
+.exercise-note{margin-top:7px;color:var(--muted);font-size:15px}
+.exercise-summary{margin-top:18px;border:2px solid #bfdbfe;background:#eff6ff;border-radius:18px;padding:16px}
+.exercise-chips{display:flex;gap:8px;flex-wrap:wrap}.exercise-chip{background:#fff;border:1px solid #bfdbfe;border-radius:999px;padding:7px 11px;font-weight:800;color:#1d4ed8}
+.exercise-filter{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px}.filter-btn{border:1px solid var(--line);background:#fff;color:var(--text);border-radius:999px;padding:8px 12px;font-weight:800;cursor:pointer}.filter-btn.on{background:var(--blue);color:#fff;border-color:var(--blue)}
 </style>
 </head>
 <body>
@@ -145,7 +161,24 @@ label{display:block;font-weight:800;margin-top:12px}select,input,textarea{width:
 </section>
 
 <section id="plan" class="page">
-  <div class="card"><h2>選擇適合的運動</h2><div id="activities" class="choice-grid"></div></div>
+  <div class="card">
+    <h2>選擇適合的運動</h2>
+    <p class="muted">可複選，點選圖卡後會顯示藍色外框與勾選記號。</p>
+    <div class="exercise-filter">
+      <button class="filter-btn on" data-filter="全部" onclick="setExerciseFilter('全部')">全部</button>
+      <button class="filter-btn" data-filter="有氧" onclick="setExerciseFilter('有氧')">有氧運動</button>
+      <button class="filter-btn" data-filter="肌力" onclick="setExerciseFilter('肌力')">肌力訓練</button>
+      <button class="filter-btn" data-filter="柔軟度" onclick="setExerciseFilter('柔軟度')">柔軟度</button>
+      <button class="filter-btn" data-filter="平衡" onclick="setExerciseFilter('平衡')">平衡活動</button>
+      <button class="filter-btn" data-filter="生活型態" onclick="setExerciseFilter('生活型態')">生活型態活動</button>
+    </div>
+    <div id="activities" class="exercise-card-grid"></div>
+    <div class="exercise-summary">
+      <h3>目前已選擇</h3>
+      <div id="exerciseSummary" class="exercise-chips"></div>
+      <p id="exerciseSummaryText" class="muted" style="margin-bottom:0"></p>
+    </div>
+  </div>
   <div class="card"><h2>設定小目標</h2><label>每次時間</label><select id="duration"><option>10 分鐘（開始養成）</option><option>15 分鐘</option><option>20 分鐘</option><option selected>30 分鐘（建議）</option><option>45 分鐘</option><option>60 分鐘</option></select><label>每週次數</label><select id="frequency"><option>2 次</option><option selected>3 次（初學推薦）</option><option>4 次</option><option>5 次（建議）</option><option>每天</option></select><label>您最容易開始運動的時間</label><select id="time"><option>早餐前（請先確認血糖）</option><option>早餐後 30～60 分鐘</option><option>上午空檔</option><option>午餐後 30～60 分鐘</option><option>下午空檔</option><option>傍晚</option><option selected>晚餐後 30～60 分鐘</option><option>睡前伸展 5～10 分鐘</option><option>依每天空閒時間安排</option></select><label>可能遇到的困難</label><select id="barrier"><option>太忙沒時間</option><option>工作或家務後太累</option><option>容易忘記</option><option>沒有人陪伴</option><option>不知道做什麼運動</option><option>擔心血糖太低</option><option>擔心膝蓋或關節不舒服</option><option>腳部容易不舒服</option><option>天氣太熱或下雨</option><option>沒有適合運動的地方</option><option>尚未養成運動習慣</option></select><label>替代方案</label><select id="backup"><option>每次先走 10 分鐘</option><option>分成兩次，各做 10～15 分鐘</option><option>在住家附近多走一圈</option><option>在家做椅子運動</option><option>在家做 10 分鐘伸展</option><option>下雨時改成室內走動</option><option>和家人或朋友一起散步</option><option>跟著運動影片一起做</option><option>使用彈力帶做簡單肌力訓練</option><option>今天沒完成，改到明天再做</option></select><div class="actions"><button class="btn" onclick="savePlan()">儲存計畫</button></div></div>
 </section>
 
@@ -185,14 +218,69 @@ label{display:block;font-weight:800;margin-top:12px}select,input,textarea{width:
 </main>
 
 <script>
-const activityOptions=["快走","市場多走一圈","健走","公園散步","伸展運動","彈力帶肌力訓練","扶椅抬腿","坐姿體操","太極拳","八段錦","超慢跑","騎腳踏車","游泳或水中運動","爬樓梯","廣場舞／健康舞","跟音樂律動","園藝活動","家務活動"];
+const exerciseCatalog=[
+{name:"快走",icon:"🚶",category:"有氧",stars:5,tag:"最推薦",time:"20～30分鐘",note:"適合多數慢性病患者"},
+{name:"健走",icon:"🥾",category:"有氧",stars:5,tag:"推薦",time:"20～30分鐘",note:"可依體力調整速度"},
+{name:"公園散步",icon:"🌳",category:"有氧",stars:4,tag:"容易開始",time:"15～30分鐘",note:"適合初學者"},
+{name:"超慢跑",icon:"🏃",category:"有氧",stars:3,tag:"依體力進行",time:"10～20分鐘",note:"注意膝關節狀況"},
+{name:"騎腳踏車",icon:"🚲",category:"有氧",stars:4,tag:"低衝擊",time:"20～30分鐘",note:"戶外注意交通安全"},
+{name:"游泳或水中運動",icon:"🏊",category:"有氧",stars:4,tag:"低關節負擔",time:"20～30分鐘",note:"注意足部傷口與安全"},
+{name:"廣場舞／健康舞",icon:"💃",category:"有氧",stars:4,tag:"有趣易持續",time:"20～30分鐘",note:"增加社交互動"},
+{name:"彈力帶肌力訓練",icon:"💪",category:"肌力",stars:5,tag:"推薦",time:"10～20分鐘",note:"每週2至3次"},
+{name:"扶椅抬腿",icon:"🪑",category:"肌力",stars:5,tag:"安全入門",time:"10～15分鐘",note:"適合膝蓋較不穩者"},
+{name:"坐姿體操",icon:"🧘",category:"肌力",stars:5,tag:"居家可做",time:"10～15分鐘",note:"適合體力較弱者"},
+{name:"爬樓梯",icon:"🪜",category:"肌力",stars:3,tag:"依能力",time:"5～10分鐘",note:"注意膝關節與平衡"},
+{name:"伸展運動",icon:"🙆‍♀️",category:"柔軟度",stars:5,tag:"每日可做",time:"5～10分鐘",note:"運動前後皆適合"},
+{name:"八段錦",icon:"🍃",category:"柔軟度",stars:5,tag:"溫和推薦",time:"10～20分鐘",note:"兼顧呼吸與柔軟度"},
+{name:"跟音樂律動",icon:"🎵",category:"柔軟度",stars:4,tag:"輕鬆有趣",time:"10～20分鐘",note:"在家即可完成"},
+{name:"太極拳",icon:"☯️",category:"平衡",stars:5,tag:"改善平衡",time:"15～30分鐘",note:"適合長者與初學者"},
+{name:"單腳站立扶牆",icon:"🧍",category:"平衡",stars:4,tag:"注意安全",time:"每側10～20秒",note:"靠牆或扶穩固家具"},
+{name:"市場或住家多走一圈",icon:"🛒",category:"生活型態",stars:5,tag:"融入日常",time:"10～20分鐘",note:"不必另外安排場地"},
+{name:"園藝活動",icon:"🌼",category:"生活型態",stars:4,tag:"生活化活動",time:"20～30分鐘",note:"避免長時間彎腰"},
+{name:"家務活動",icon:"🧹",category:"生活型態",stars:4,tag:"日常累積",time:"20～30分鐘",note:"例如掃地與整理環境"}
+];
+let activityOptions=exerciseCatalog.map(x=>x.name);
+let currentExerciseFilter="全部";
 let data=JSON.parse(localStorage.getItem("healthPassportStable")||"{}");
 data.activities=data.activities||["快走"];data.logs=data.logs||[];data.assessment=data.assessment||{};let doneToday=true;
 function save(){localStorage.setItem("healthPassportStable",JSON.stringify(data))}
 function show(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("on"));document.getElementById(id).classList.add("on");document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x.dataset.p===id));if(id==="review")renderReview();if(id==="passport")renderPassport();scrollTo(0,0)}
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>show(b.dataset.p));
-function renderActivities(){activities.innerHTML=activityOptions.map(x=>`<button class="choice ${data.activities.includes(x)?"on":""}" onclick="toggleActivity('${x}')">${x}</button>`).join("");activityToday.innerHTML=activityOptions.map(x=>`<option>${x}</option>`).join("")}
-function toggleActivity(x){data.activities=data.activities.includes(x)?data.activities.filter(y=>y!==x):[...data.activities,x];save();renderActivities()}
+function renderActivities(){
+  const filtered=currentExerciseFilter==="全部"?exerciseCatalog:exerciseCatalog.filter(x=>x.category===currentExerciseFilter);
+  activities.innerHTML=filtered.map(x=>{
+    const selected=data.activities.includes(x.name);
+    return `<button class="exercise-card ${selected?"on":""}" onclick="toggleActivity('${x.name}')">
+      <span class="checkmark">${selected?"✓":""}</span>
+      <div class="exercise-icon">${x.icon}</div>
+      <div class="exercise-name">${x.name}</div>
+      <div class="exercise-stars">${"★".repeat(x.stars)}${"☆".repeat(5-x.stars)}</div>
+      <span class="exercise-tag">${x.tag}</span>
+      <div class="exercise-time">⏱ ${x.time}</div>
+      <div class="exercise-note">${x.note}</div>
+    </button>`;
+  }).join("");
+  activityToday.innerHTML=activityOptions.map(x=>`<option>${x}</option>`).join("");
+  renderExerciseSummary();
+}
+function toggleActivity(x){
+  data.activities=data.activities.includes(x)?data.activities.filter(y=>y!==x):[...data.activities,x];
+  save();renderActivities();
+}
+function setExerciseFilter(category){
+  currentExerciseFilter=category;
+  document.querySelectorAll(".filter-btn").forEach(b=>b.classList.toggle("on",b.dataset.filter===category));
+  renderActivities();
+}
+function renderExerciseSummary(){
+  if(!data.activities.length){
+    exerciseSummary.innerHTML='<span class="muted">尚未選擇運動</span>';
+    exerciseSummaryText.textContent="請先選擇一至三項較願意開始的活動。";
+    return;
+  }
+  exerciseSummary.innerHTML=data.activities.map(x=>`<span class="exercise-chip">✓ ${x}</span>`).join("");
+  exerciseSummaryText.textContent=data.activities.length<=3?"建議先從其中一項開始，成功後再增加。":"目前選擇較多，建議和個管師共同挑選一至三項作為第一階段目標。";
+}
 function savePlan(){data.duration=duration.value;data.frequency=frequency.value;data.time=time.value;data.barrier=barrier.value;data.backup=backup.value;save();alert("計畫已儲存")}
 function setDone(v){doneToday=v;doneYes.classList.toggle("on",v);doneNo.classList.toggle("on",!v);if(!v)minutes.value="0"}
 function dateKey(d=new Date()){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
